@@ -57,8 +57,9 @@ Cloudinary =
 		if _.isFunction ops
 			callback = ops
 			ops = {}
-
-		if not _.isArray files
+		# _.isArray is returning false, when files is instance of FileList
+		# but we need to iterate thru FileList too, like it is an array
+		if !_.isArray(files) && !(files instanceof FileList)
 			file = files
 			reader = new FileReader
 
